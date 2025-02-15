@@ -23,31 +23,30 @@
             attribution: '&copy; <a href="https://carto.com/">CartoDB</a>'
         });
         tileLayer.addTo(map);
-        // var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        //     attribution: '© OpenStreetMap contributors'
-        // }).addTo(map);
+        var posts = [
+            { id: 1, title: "投稿1", imageUrl: "IMG-3573.jpg", lat: 35.98734, lng: 139.43100 },
+            { id: 2, title: "投稿2", imageUrl: "IMG-3573.jpg", lat: 35.93757, lng: 139.13250 },
+            { id: 3, title: "投稿3", imageUrl: "IMG-3573.jpg", lat: 35.62450, lng: 139.53000 },
+            { id: 4, title: "投稿4", imageUrl: "IMG-3573.jpg", lat: 35.18300, lng: 139.22850 },
+            { id: 5, title: "投稿5", imageUrl: "IMG-3573.jpg", lat: 35.90600, lng: 139.73500 }
+        ];
 
-        var htmlIcon = L.divIcon({
-            className: 'custom-div-icon', // CSS クラスを設定
-            html: `
-        <div class="map-thumbnail">
-            <img src="IMG-3573.jpg" width="50px" height="50px" />
-            <p>投稿タイトル</p>
-        </div>
-        `,
-            iconSize: [60, 50], // アイコンのサイズ（自動調整も可能）
-            iconAnchor: [25, 50]
+        posts.forEach(post => {
+            var htmlIcon = L.divIcon({
+                className: 'custom-div-icon',
+                html: `
+                <div class="map-thumbnail">
+                    <img src="${post.imageUrl}" width="50px" height="50px" />
+                    <p>${post.title}</p>
+                </div>
+                `,
+                iconSize: [60, 60], // アイコンのサイズ
+                iconAnchor: [30, 60] // ピンの位置調整
+            });
+
+            L.marker([post.lat, post.lng], { icon: htmlIcon }).addTo(map)
+                .bindPopup(`<b>${post.title}</b><br><img src="${post.imageUrl}" width="100px" height="100px">`);
         });
-        L.marker([35.588822, 139.584545], { icon: htmlIcon }).addTo(map);
-
-        var marker = L.marker([35.66572, 139.73100]).addTo(map);
-
-        marker.bindPopup(`
-            <div style="text-align:center;">
-                <img src="IMG-3573.jpg" width="100px" height="100px" style="border-radius: 5px;"/>
-                <p><b>投稿タイトル</b></p>
-            </div>
-        `);
     </script>
 </body>
 
