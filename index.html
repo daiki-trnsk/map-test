@@ -45,7 +45,7 @@
             });
 
             L.marker([post.lat, post.lng], { icon: htmlIcon }).addTo(map)
-                .bindPopup(`<b>${post.title}</b><br><img src="${post.imageUrl}" width="100px" height="100px">`);
+                .bindPopup(`<b>${post.title}</b><br><img src="${post.imageUrl}" width="100px" height="100px">`, {offset: [0, -50]});
         });
     </script>
 </body>
