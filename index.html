@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>osm-test</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+</head>
+
+<body>
+    <div id="mapid"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        var map = L.map('mapid', {
+            center: [35.66572, 139.73100],
+            zoom: 6,
+        });
+        var tileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://carto.com/">CartoDB</a>'
+        });
+        tileLayer.addTo(map);
+        // var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //     attribution: '© OpenStreetMap contributors'
+        // }).addTo(map);
+
+        var htmlIcon = L.divIcon({
+            className: 'custom-div-icon', // CSS クラスを設定
+            html: `
+        <div class="map-thumbnail">
+            <img src="IMG-3573.jpg" width="50px" height="50px" />
+            <p>投稿タイトル</p>
+        </div>
+        `,
+            iconSize: [60, 50], // アイコンのサイズ（自動調整も可能）
+            iconAnchor: [25, 50]
+        });
+        L.marker([35.588822, 139.584545], { icon: htmlIcon }).addTo(map);
+
+        var marker = L.marker([35.66572, 139.73100]).addTo(map);
+
+        marker.bindPopup(`
+            <div style="text-align:center;">
+                <img src="IMG-3573.jpg" width="100px" height="100px" style="border-radius: 5px;"/>
+                <p><b>投稿タイトル</b></p>
+            </div>
+        `);
+    </script>
+</body>
+
+</html>
